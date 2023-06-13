@@ -1,0 +1,284 @@
+@charset "UTF-8";
+/*también podemos definir las variables de nuestros colores en formato rgb*/
+/*$primary-color: rgba(186, 189, 141, 1);*/
+/*los mixin sirven para ahorrar código que se repite en todo el archivo, se define aqui arriba y luego se reemplaza en los distintos sectores dónde se repite el código, llamandolo con la expresión @include*/
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #FFEFE7;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+nav {
+  width: auto;
+  /*ordeno mis elementos de manera horizontal
+  display: flex;
+  */
+  /*le doy espacio a mis elementos para que no esten pegados entre ellos*/
+  /*space-between se encarga de que vamos a tener un espacio entre nuestros elementos, pero los elementos se van a quedar uno en un extremo y el otro en otro extremo, si tuvieramos un tercer elemento quedaría completamente centrado
+  justify-content: space-between;*/
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /*damos el mismo color a todos los elementos*/
+  color: #7C6A0A;
+  padding: 15px;
+}
+nav p {
+  font-size: 1.5em;
+  padding-left: 30px;
+}
+nav .icons {
+  display: flex;
+  /*damos espacio entre los elementos*/
+  gap: 15px;
+}
+nav .icons button {
+  background: none;
+  border-style: none;
+}
+
+article {
+  /*para que vaya creciendo en automático*/
+  width: auto;
+  /*damos color al texto*/
+  color: #7C6A0A;
+  /*damos margen a lado y lado, para alinear con el texto de nuestro navbar*/
+  padding-left: 45px;
+  padding-right: 45px;
+  /*damos más espacio en la parte de arriba*/
+  padding-top: 70px;
+  /*colocamos los dos div uno al lado del otro, de forma horizontal
+  display: flex;
+  */
+  /*con esto va a crecer en relación al texto y la imagen que le estemos poniendo en nuestros dos contenedores
+  justify-content: space-between;
+  */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+article .impact-section {
+  /*automaticamente se pone un elemento al lado del otro
+  display: flex;
+  */
+  /*le decimos que se coloque uno debajo del otro
+  flex-direction: column;
+  */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  /*para que no esté tan pegado a nuestro navbar*/
+  padding-top: 50px;
+  /*se genera un espacio entre cada uno de los elementos*/
+  gap: 25px;
+}
+article h1 {
+  font-size: 3em;
+  /*quitamos el padding y el margin que trae por defecto*/
+  padding: 0;
+  margin: 0;
+}
+article p {
+  font-size: 1.5em;
+}
+article button {
+  background: none;
+  border-style: none;
+}
+article button {
+  /*si queremos trabajar a futuro la parte responsiva, esto nos va a ayudar mucho*/
+  width: 12vw;
+  /*para dar un ancho y alto al boton*/
+  padding: 20px;
+  background-color: #FA9500;
+  border-style: none;
+  /*damos borde redondeado al botón*/
+  border-radius: 35px;
+  /*damos color blanco al texto del botón*/
+  color: white;
+  /*damos tamaño de fuente al texto*/
+  font-size: 1em;
+}
+article button:hover {
+  transform: scale(1.1);
+}
+article img {
+  /*es mejor trabajar el ancho de esta forma para incluir la parte responsiva*/
+  width: 25vw;
+  /*le damos borde redondeado a la imagen*/
+  border-radius: 19px;
+}
+
+section {
+  width: auto;
+  /*para que la altura crezca lo que necesite crecer*/
+  height: auto;
+  padding: 60px;
+}
+section h2 {
+  /*colocamos color al texto*/
+  color: #7C6A0A;
+  /*damos tamaño de fuente*/
+  font-size: 2em;
+}
+section .healthcare, section .furniture {
+  padding-bottom: 60px;
+}
+section .healthcare h2, section .furniture h2 {
+  /*damos grosor a la letra*/
+  font-weight: 300;
+  padding-bottom: 60px;
+}
+section .healthcare .card-section, section .furniture .card-section {
+  /*display: flex;*/
+  width: auto;
+  height: auto;
+  /*para alinear horizontal y verticalmente
+  justify-content: center;
+  */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  /*para pasar las segundas tres cartas hacia la fila de abajo*/
+  flex-wrap: wrap;
+  /*align-items: center;*/
+  /*para dar espacio entre las columnas de los elementos*/
+  -moz-column-gap: 200px;
+       column-gap: 200px;
+  /*para dar espacio entre las filas de los elementos*/
+  row-gap: 80px;
+}
+section .healthcare .product-card, section .furniture .product-card {
+  width: 14vw;
+  height: 55vh;
+  background-color: #FFDAC6;
+  color: #7C6A0A;
+  padding: 20px;
+  border-radius: 8px;
+}
+section .healthcare .product-card .icon, section .furniture .product-card .icon {
+  width: 100%;
+  display: flex;
+  /*pasamos el corazón del lado derecho*/
+  justify-content: flex-end;
+  /*para separar el corazón de la imagen*/
+  padding-bottom: 12px;
+}
+section .healthcare .product-card .icon svg, section .furniture .product-card .icon svg {
+  width: 28px;
+  height: 28px;
+}
+section .healthcare .product-card .product-image, section .furniture .product-card .product-image {
+  width: 100%;
+  height: auto;
+  display: flex;
+  /*para centrar nuestra imagen en nuestro contenedor*/
+  justify-content: center;
+  align-items: center;
+}
+section .healthcare .product-card .product-image img, section .furniture .product-card .product-image img {
+  width: 12vw;
+  height: 30vh;
+  /*así non se rompe la relación de la imagen*/
+  -o-object-fit: cover;
+     object-fit: cover;
+  /*le ponemos borde redondeado a la imagen tambien*/
+  border-radius: 6px;
+}
+section .furniture {
+  /*con extend, replicamos los estilos que hayamos utilizado en otra clase, y facilmente con la herencia trajimos esos estilos*/
+}
+section .furniture .product-card {
+  background-color: #BABD8D;
+  color: white;
+}
+
+.about-us {
+  padding-bottom: 60px;
+}
+.about-us h2 {
+  font-weight: bold;
+  padding-bottom: 60px;
+}
+.about-us .mission-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.about-us .mission-section .earth, .about-us .mission-section .innovation {
+  width: 30vw;
+  display: flex;
+  gap: 40px;
+  color: #e86424;
+}
+.about-us .mission-section .earth img, .about-us .mission-section .innovation img {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.about-us .mission-section .earth p, .about-us .mission-section .innovation p {
+  text-align: center;
+  font-size: 1.5em;
+}
+.gallery h2 {
+  font-weight: bold;
+  padding-bottom: 60px;
+}
+.gallery .gallery-images {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.gallery .gallery-images img {
+  width: 30vw;
+  height: 45vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 5px 35%;
+     object-position: 5px 35%;
+  border-radius: 16px;
+  /*cuando el mouse pasa encima de la imagen, la agranda un poquito, animación*/
+}
+.gallery .gallery-images img:hover {
+  transform: scale(1.1);
+}
+
+.location {
+  color: #e86424;
+}
+.location h2 {
+  padding-bottom: 60px;
+  padding-top: 60px;
+}
+.location .map {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 50px;
+}
+.location h3, .location p {
+  font-size: 1.5em;
+}
+
+footer {
+  background-color: #FA9500;
+  width: 100%;
+  height: auto;
+  padding: 40px;
+  color: white;
+}
+footer .social-media {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding-bottom: 40px;
+}/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,281 @@
+$primary-color: #FFEFE7;
+/*también podemos definir las variables de nuestros colores en formato rgb*/
+/*$primary-color: rgba(186, 189, 141, 1);*/
+
+$secondary-color: #FFDAC6;
+$tertiary-color: #BABD8D;
+$primary-text-color: #7C6A0A;
+$quaternary-color: #FA9500;
+$font-stack: 'IBM Plex Sans', sans-serif;
+$paragraph-size: 1.5em;
+
+/*los mixin sirven para ahorrar código que se repite en todo el archivo, se define aqui arriba y luego se reemplaza en los distintos sectores dónde se repite el código, llamandolo con la expresión @include*/
+@mixin flexCenter($direction,$content,$align) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $content;
+    align-items: $align;
+}
+
+@mixin buttonStyle {
+    button {
+        background: none;
+        border-style: none;
+    }
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: $primary-color;
+    font-family: $font-stack;
+}
+nav {
+    width: auto;
+    /*ordeno mis elementos de manera horizontal
+    display: flex;
+    */
+    
+    /*le doy espacio a mis elementos para que no esten pegados entre ellos*/
+    /*space-between se encarga de que vamos a tener un espacio entre nuestros elementos, pero los elementos se van a quedar uno en un extremo y el otro en otro extremo, si tuvieramos un tercer elemento quedaría completamente centrado
+    justify-content: space-between;*/
+    @include flexCenter(row,space-between ,center );
+    /*damos el mismo color a todos los elementos*/
+    color: $primary-text-color;
+    padding: 15px;
+    p {
+        font-size: $paragraph-size;
+        padding-left: 30px;
+    }
+    .icons {
+        display: flex;
+        /*damos espacio entre los elementos*/
+        gap: 15px;
+        @include buttonStyle;
+    }
+}
+
+article {
+    /*para que vaya creciendo en automático*/
+    width: auto;
+    /*damos color al texto*/
+    color: $primary-text-color;
+    /*damos margen a lado y lado, para alinear con el texto de nuestro navbar*/
+    padding-left: 45px;
+    padding-right: 45px;
+    /*damos más espacio en la parte de arriba*/
+    padding-top: 70px;
+    /*colocamos los dos div uno al lado del otro, de forma horizontal
+    display: flex;
+    */
+    /*con esto va a crecer en relación al texto y la imagen que le estemos poniendo en nuestros dos contenedores
+    justify-content: space-between;
+    */
+    @include flexCenter(row, space-between, center);
+    .impact-section {
+        /*automaticamente se pone un elemento al lado del otro
+        display: flex;
+        */
+        /*le decimos que se coloque uno debajo del otro
+        flex-direction: column;
+        */
+        @include flexCenter(column, space-evenly, flex-start);
+        /*para que no esté tan pegado a nuestro navbar*/
+        padding-top: 50px;
+        /*se genera un espacio entre cada uno de los elementos*/
+        gap: 25px;
+    }
+    h1 {
+        font-size: 3em;
+        /*quitamos el padding y el margin que trae por defecto*/
+        padding: 0;
+        margin: 0;
+    }
+    p {
+        font-size: $paragraph-size;
+    }
+    @include buttonStyle;
+    button {
+        /*si queremos trabajar a futuro la parte responsiva, esto nos va a ayudar mucho*/
+        width: 12vw;
+        /*para dar un ancho y alto al boton*/
+        padding: 20px;
+        background-color: $quaternary-color;
+        border-style: none;
+        /*damos borde redondeado al botón*/
+        border-radius: 35px;
+        /*damos color blanco al texto del botón*/
+        color: white;
+        /*damos tamaño de fuente al texto*/
+        font-size: 1em;
+        &:hover {
+            transform: scale(1.1);
+        }    
+    }
+    img {
+        /*es mejor trabajar el ancho de esta forma para incluir la parte responsiva*/
+        width: 25vw;
+        /*le damos borde redondeado a la imagen*/
+        border-radius: 19px;
+    }    
+}
+
+section {
+    width: auto;
+    /*para que la altura crezca lo que necesite crecer*/
+    height: auto;
+    padding: 60px;
+    h2 {
+        /*colocamos color al texto*/
+        color: $primary-text-color;
+        /*damos tamaño de fuente*/
+        font-size: 2em;
+    }
+    .healthcare {
+        padding-bottom: 60px;
+        h2 {
+            /*damos grosor a la letra*/
+            font-weight: 300;
+            padding-bottom: 60px;
+        }
+        .card-section {
+            /*display: flex;*/
+            width: auto;
+            height: auto;
+            /*para alinear horizontal y verticalmente
+            justify-content: center;
+            */
+            @include flexCenter(row, space-evenly, center);
+            /*para pasar las segundas tres cartas hacia la fila de abajo*/
+            flex-wrap: wrap;
+            /*align-items: center;*/
+            
+            /*para dar espacio entre las columnas de los elementos*/
+            column-gap: 200px;
+            /*para dar espacio entre las filas de los elementos*/
+            row-gap: 80px;
+        }
+        .product-card {
+            width: 14vw;
+            height: 55vh;
+            background-color: $secondary-color;
+            color: $primary-text-color;
+            padding: 20px;
+            border-radius: 8px;
+            .icon {
+                width: 100%;
+                display: flex;
+                /*pasamos el corazón del lado derecho*/
+                justify-content: flex-end;
+                /*para separar el corazón de la imagen*/ 
+                padding-bottom: 12px;
+                svg {
+                    width: 28px;
+                    height: 28px;
+                }
+            }
+            .product-image {
+                width: 100%;
+                height: auto;
+                display: flex;
+                /*para centrar nuestra imagen en nuestro contenedor*/
+                justify-content: center;
+                align-items: center;
+                img {
+                    width: 12vw;
+                    height: 30vh;
+                    /*así non se rompe la relación de la imagen*/
+                    object-fit: cover;
+                    /*le ponemos borde redondeado a la imagen tambien*/
+                    border-radius: 6px;
+                }
+            }
+            
+        }
+        
+    }
+    .furniture {
+        /*con extend, replicamos los estilos que hayamos utilizado en otra clase, y facilmente con la herencia trajimos esos estilos*/
+        @extend .healthcare;
+        .product-card {
+            background-color: $tertiary-color;
+            color: white;
+        }    
+    }
+}
+
+.about-us {
+    padding-bottom: 60px;
+    h2 {
+        font-weight: bold;
+        padding-bottom: 60px;    
+    }
+    .mission-section {
+        @include flexCenter(row, space-evenly, center);
+        .earth {
+            $text-color: #e86424;
+            width: 30vw;
+            display: flex;
+            gap: 40px;
+            color: $text-color;
+            img {
+                object-fit: contain;   
+            }
+            p {
+                text-align: center;
+                font-size: $paragraph-size;
+            }
+        }
+        
+    }
+    .innovation {
+        @extend .earth;
+    }
+}
+.gallery {
+    h2 {
+        font-weight: bold;
+        padding-bottom: 60px;    
+    }
+    .gallery-images {
+        @include flexCenter(row, space-between, center);
+        img {
+            width: 30vw;
+            height: 45vh;
+            object-fit: cover;
+            object-position: 5px 35%;
+            border-radius: 16px;
+            /*cuando el mouse pasa encima de la imagen, la agranda un poquito, animación*/
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }    
+}
+.location {
+    $text-color: #e86424;
+    color: $text-color;
+    h2 {
+        padding-bottom: 60px;
+        padding-top: 60px;
+    }
+    .map {
+        @include flexCenter(row, center, center);
+        padding-bottom: 50px;
+    }
+    h3,p {
+        font-size: $paragraph-size;
+    }
+}
+footer {
+    background-color: $quaternary-color;
+    width: 100%;
+    height: auto;
+    padding: 40px;
+    color: white;
+    .social-media {
+        @include flexCenter(row, center, center);
+        gap: 40px;
+        padding-bottom: 40px;  
+    }
+}
